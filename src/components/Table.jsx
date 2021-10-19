@@ -94,7 +94,7 @@ const Table = ({ columns, data, setData, detail, setDetail }) => {
   const deleteUserHandler = (event) => {
     const newData = removeByIndexs(
       data,
-      Object.keys(selectedRowIds).map((x) => parseInt(x, 5))
+      Object.keys(selectedRowIds).map((x) => parseInt(x, data.length))
     );
     setData(newData);
   };
