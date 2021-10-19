@@ -19,12 +19,22 @@ import UserDialog from "./UserDialog";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
+import PropTypes from "prop-types";
 
-const defaultProps = {
-  //pageSize: 5
+const propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  setData: PropTypes.func.isRequired,
+  detail: PropTypes.object,
+  setDetail: PropTypes.func,
 };
 
-function Table({ columns, data, setData, detail, setDetail }) {
+const defaultProps = {
+  detail: undefined,
+  setDetail: () => {},
+};
+
+const Table = ({ columns, data, setData, detail, setDetail }) => {
   const [open, setOpen] = React.useState(false);
   const {
     getTableProps,
@@ -65,7 +75,10 @@ function Table({ columns, data, setData, detail, setDetail }) {
           Header: () => null,
           Cell: ({ row }) => (
             <Tooltip title="See More">
-              <IconButton aria-label="See More" onClick={()=>seeMoreHandler(row.id)}>
+              <IconButton
+                aria-label="See More"
+                onClick={() => seeMoreHandler(row.id)}
+              >
                 <AddIcon />
               </IconButton>
             </Tooltip>
@@ -92,12 +105,12 @@ function Table({ columns, data, setData, detail, setDetail }) {
 
   const seeMoreHandler = (id) => {
     setOpen(true);
-    setDetail(id)
+    setDetail(id);
   };
 
   return (
     <TableContainer>
-      <UserDialog detail={detail} open={open} setOpen={setOpen}/>
+      <UserDialog detail={detail} open={open} setOpen={setOpen} />
       <TableToolbar
         numSelected={Object.keys(selectedRowIds).length}
         deleteUserHandler={deleteUserHandler}
@@ -147,7 +160,7 @@ function Table({ columns, data, setData, detail, setDetail }) {
       </MaUTable>
     </TableContainer>
   );
-}
+};
 
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
@@ -166,6 +179,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
+Table.propTypes = propTypes;
 Table.defaultProps = defaultProps;
 
 export default Table;

@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Table from "./components/Table";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import "./App.css";
 import api from "./utils/api";
@@ -66,7 +65,6 @@ function App() {
   );
 
  const setDetailUserHandler = (userId) =>{
-   debugger;
    const user = users.users.find(({id}) => (id === +userId));
    const albuns = users.albuns.filter((item) => (item.userId === +userId));
    const detail={user,albuns}

@@ -4,6 +4,18 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  open: PropTypes.bool.isRequired,
+  detail: PropTypes.object,
+  setOpen: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  detail: undefined,
+};
+
 
 const UserDialog = ({ detail, open, setOpen }) => {
   const handleClose = () => {
@@ -27,7 +39,7 @@ const UserDialog = ({ detail, open, setOpen }) => {
                   Albuns title
                   <ul>
                     {detail?.albuns.map((item) => (
-                      <li>{item?.title}</li>
+                      <li key={item.id}>{item?.title}</li>
                     ))}
                   </ul>
                 </li>
@@ -43,5 +55,8 @@ const UserDialog = ({ detail, open, setOpen }) => {
     </div>
   );
 };
+
+UserDialog.propTypes = propTypes;
+UserDialog.defaultProps =defaultProps;
 
 export default UserDialog;

@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 GlobalFilter.propTypes = {
-  globalFilter: PropTypes.string.isRequired,
+  globalFilter: PropTypes.string,
   setGlobalFilter: PropTypes.func.isRequired,
 };
 
